@@ -2,14 +2,29 @@
 
 namespace App\Models;
 
+use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Properties
+ * @property int $id
+ * @property string $uuid
+ * @property string $name
+ * @property string $username
+ * @property string $email
+ * @property string $password
+ * @property string $remember_token
+**/
+
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, 
+        HasFactory, 
+        Notifiable, 
+        GeneratesUuid;
 
     /**
      * The attributes that are mass assignable.
@@ -30,14 +45,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }
